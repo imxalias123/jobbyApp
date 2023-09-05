@@ -69,3 +69,6 @@
     padding: 8px 0px 8px 15px;
   }
 }
+.error-msg {
+  color: red;
+}
