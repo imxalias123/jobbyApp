@@ -17,6 +17,7 @@ class LoginForm extends Component {
   }
 
   onSubmitFailure = errorMsg => {
+    console.log(errorMsg)
     this.setState({
       onSubmitError: true,
       errorMsg,
@@ -34,11 +35,12 @@ class LoginForm extends Component {
     }
     const response = await fetch(url, options)
     const data = await response.json()
-    console.log(response)
+    console.log(data.jwt_token)
+
     if (response.ok === true) {
       this.onSubmitSuccess(data.jwt_token)
     } else {
-      this.onSubmitFailure(data.err_msg)
+      this.onSubmitFailure(data.error_msg)
     }
   }
 

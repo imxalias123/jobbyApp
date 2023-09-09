@@ -62,8 +62,9 @@
     margin-top: 30px;
   }
   .login-btn {
-    margin-bottom: 25px;
+    margin-bottom: 7px;
     padding: 12px 0px 12px 0px;
+    font-size: 18px;
   }
   .input {
     padding: 8px 0px 8px 15px;
@@ -71,4 +72,7 @@
 }
 .error-msg {
   color: red;
+  margin-top: 0px;
+  padding-top: 0px;
+  font-size: 12px;
 }

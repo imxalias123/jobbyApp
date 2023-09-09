@@ -8,7 +8,6 @@ const Home = () => {
   if (jwtToken === undefined) {
     return <Redirect to="/login" />
   }
-
   return (
     <div className="home">
       <Header />
@@ -28,5 +27,4 @@ const Home = () => {
     </div>
   )
 }
-
 export default Home

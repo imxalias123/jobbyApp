@@ -1,5 +1,6 @@
 import './index.css'
 import Cookies from 'js-cookie'
+
 import {Link, withRouter} from 'react-router-dom'
 import {AiFillHome} from 'react-icons/ai'
 import {BsBriefcase} from 'react-icons/bs'
@@ -24,15 +25,14 @@ const Header = props => {
         <BsBriefcase className="case-icon" size={25} />
         <FiLogOut className="logout-icon" size={25} />
       </div>
-
-      <div className="link-container">
+      <ul className="link-container">
         <Link className="link" to="/">
-          <p>Home</p>
+          <li>Home</li>
         </Link>
         <Link className="link" to="/jobs">
-          <p>Jobs</p>
+          <li>Jobs</li>
         </Link>
-      </div>
+      </ul>
       <button type="button" onClick={onClickLogout} className="logout-btn">
         Logout
       </button>
