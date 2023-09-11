@@ -1,10 +1,18 @@
+.profile-container {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+}
+
 .jobs-container {
   background-color: black;
   background-size: cover;
   min-height: 100vh;
-  padding-left: 0px;
-  margin-left: 0px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.unordered-list {
+  padding-left: 0px;
+  margin-left: 0px;
 }

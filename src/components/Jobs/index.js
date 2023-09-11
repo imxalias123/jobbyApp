@@ -5,13 +5,61 @@ import Cookies from 'js-cookie'
 import Header from '../Header'
 import JobCard from '../JobCard'
 
+const apiJobStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
+const apiStatusConstants = {
+  initial: 'INITIAL',
+  success: 'SUCCESS',
+  failure: 'FAILURE',
+  inProgress: 'IN_PROGRESS',
+}
+
 class Jobs extends Component {
   state = {
+    profileData: [],
     jobsList: [],
+    responseStatus: false,
+    apiStatus: apiStatusConstants.initial,
+    apiJobStatus: apiJobStatusConstants.initial,
   }
 
   componentDidMount() {
+    this.getProfile()
     this.getJobs()
+  }
+
+  getProfile = async () => {
+    const url = 'https://apis.ccbp.in/profile'
+    const jwtToken = Cookies.get('jwt_token')
+    const options = {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${jwtToken}`,
+      },
+    }
+    const response = await fetch(url, options)
+    if (response.ok === true) {
+      const fetchedData = await response.json()
+      const updatedData = fetchedData.profile_details.map(each => ({
+        name: each.name,
+        profileImageUrl: each.profile_image_url,
+        shortBio: each.short_bio,
+      }))
+      this.setState({
+        profileData: updatedData,
+        responseStatus: true,
+        apiStatus: apiStatusConstants.success,
+      })
+    } else {
+      this.setState({
+        apiStatus: apiJobStatusConstants.failure,
+      })
+    }
   }
 
   getJobs = async () => {
@@ -37,24 +85,89 @@ class Jobs extends Component {
         rating: each.rating,
         title: each.title,
       }))
-      this.setState({jobsList: updatedData})
+      this.setState({
+        jobsList: updatedData,
+        apiJobStatus: apiJobStatusConstants.success,
+      })
+    } else {
+      this.setState({
+        apiJobStatus: apiJobStatusConstants.failure,
+      })
+    }
+  }
+
+  getProfileData = () => {
+    const {profileData, responseStatus} = this.state
+
+    if (responseStatus) {
+      const {name, profileImageUrl, shortBio} = profileData[0]
+      return (
+        <div>
+          <img src={profileImageUrl} alt="profile" className="profile-img" />
+          <h1>{name}</h1>
+          <p>{shortBio}</p>
+        </div>
+      )
+    }
+    return null
+  }
+
+  getJobsData = () => {
+    const {jobsList} = this.state
+    return (
+      <div>
+        <ul className="unordered-list">
+          {jobsList.map(eachJob => (
+            <JobCard key={eachJob.id} jobsData={eachJob} />
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  renderJobStatus = () => {
+    const {apiJobStatus} = this.state
+
+    switch (apiJobStatus) {
+      case apiJobStatusConstants.success:
+        return this.getJobsData()
+      case apiJobStatusConstants.failure:
+        return this.getFailureJobsListView()
+      case apiJobStatusConstants.loading:
+        return this.getLoadingView()
+      default:
+        return null
+    }
+  }
+
+  renderProfileStatus = () => {
+    const {apiStatus} = this.state
+
+    switch (apiStatus) {
+      case apiStatusConstants.success:
+        return this.getProfileData()
+      case apiStatusConstants.failure:
+        return this.getFailureProfileView()
+      case apiStatusConstants.loading:
+        return this.getLoadingView()
+      default:
+        return null
     }
   }
 
   render() {
-    const {jobsList} = this.state
     return (
       <>
         <Header />
         <div className="jobs-container">
           <div>
             <input placeholder="Search" />
-            <ul>
-              {jobsList.map(eachJob => (
-                <JobCard key={eachJob.id} jobsData={eachJob} />
-              ))}
-            </ul>
+            <div className="profile-container">
+              {this.renderProfileStatus()}
+              <hr className="hr-line" />
+            </div>
           </div>
+          {this.renderJobStatus()}
         </div>
       </>
     )
