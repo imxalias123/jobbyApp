@@ -1,0 +1,36 @@
+.location-icon {
+  color: #fff;
+}
+.card-container {
+  background-color: #272727;
+  padding-left: 0px;
+  margin-left: 0px;
+  padding-left: 0px;
+  margin-left: 0px;
+  margin-bottom: 10px;
+}
+.employment-details {
+  display: flex;
+}
+.rating-container {
+  display: flex;
+  flex-direction: column;
+}
+.star {
+  color: #fbbf24;
+}
+.rating {
+  display: flex;
+  align-items: center;
+}
+.location-container {
+  display: flex;
+  align-items: center;
+}
+.case-icon {
+  color: #fff;
+}
+.company-logo {
+  width: 48px;
+  height: 48px;
+}

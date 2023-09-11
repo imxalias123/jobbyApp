@@ -1,6 +1,7 @@
 import './index.css'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {Redirect} from 'react-router-dom'
 
 class LoginForm extends Component {
   state = {
@@ -54,6 +55,10 @@ class LoginForm extends Component {
 
   render() {
     const {onSubmitError, username, password, errorMsg} = this.state
+    const jwtToken = Cookies.get('jwt_token')
+    if (jwtToken !== undefined) {
+      return <Redirect to="/" />
+    }
     return (
       <div className="login-container">
         <div className="login-card">

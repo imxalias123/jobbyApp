@@ -23,7 +23,8 @@ const Header = props => {
       <div className="icons-container">
         <AiFillHome className="home-icon" size={25} />
         <BsBriefcase className="case-icon" size={25} />
-        <FiLogOut className="logout-icon" size={25} />
+
+        <FiLogOut onClick={onClickLogout} className="logout-icon" size={25} />
       </div>
       <ul className="link-container">
         <Link className="link" to="/">

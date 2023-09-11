@@ -50,9 +50,15 @@
   .home-icon {
     display: none;
   }
+  .link {
+    text-decoration: none;
+    margin-left: 10px;
+    color: #fff;
+  }
   .link-container {
     display: flex;
     margin-right: 150px;
+    list-style-type: none;
   }
   .logout-btn {
     display: flex;
