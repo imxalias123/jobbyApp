@@ -151,4 +151,13 @@
   .checkbox {
     width: 28px;
   }
+  .search-btn {
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-bar {
+    font-size: 20px;
+  }
 }
