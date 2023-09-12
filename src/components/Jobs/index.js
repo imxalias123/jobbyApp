@@ -3,6 +3,7 @@ import './index.css'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {BsSearch} from 'react-icons/bs'
+import {Loader} from 'react-loader-spinner'
 import Header from '../Header'
 import JobCard from '../JobCard'
 
@@ -65,6 +66,7 @@ class Jobs extends Component {
     responseStatus: false,
     apiStatus: apiStatusConstants.initial,
     apiJobStatus: apiJobStatusConstants.initial,
+    searchInput: '',
   }
 
   componentDidMount() {
@@ -99,14 +101,17 @@ class Jobs extends Component {
       })
     } else {
       this.setState({
-        apiStatus: apiJobStatusConstants.failure,
+        apiStatus: apiStatusConstants.failure,
       })
     }
   }
 
   getJobs = async () => {
-    const apiUrl = 'https://apis.ccbp.in/jobs'
+    this.setState({apiJobStatus: apiJobStatusConstants.inProgress})
+    const {searchInput} = this.state
+
     const jwtToken = Cookies.get('jwt_token')
+    const apiUrl = `https://apis.ccbp.in/jobs?search=${searchInput}`
     const options = {
       method: 'GET',
       headers: {
@@ -156,7 +161,21 @@ class Jobs extends Component {
 
   getJobsData = () => {
     const {jobsList} = this.state
-    return (
+    const jobsLen = jobsList.length === 0
+
+    return jobsLen ? (
+      <div className="failure-container">
+        <img
+          src="https://assets.ccbp.in/frontend/react-js/no-jobs-img.png"
+          alt="no jobs"
+          className="failure-view"
+        />
+        <h1 className="failure-heading">No Jobs Found</h1>
+        <p className="failure-para">
+          We could not find any jobs. Try other filters.
+        </p>
+      </div>
+    ) : (
       <div>
         <ul className="unordered-list">
           {jobsList.map(eachJob => (
@@ -167,6 +186,12 @@ class Jobs extends Component {
     )
   }
 
+  getLoadingView = () => (
+    <div className="loader-container" data-testid="loader">
+      <Loader type="ThreeDots" color="#ffffff" height="50" width="50" />
+    </div>
+  )
+
   renderJobStatus = () => {
     const {apiJobStatus} = this.state
 
@@ -175,7 +200,7 @@ class Jobs extends Component {
         return this.getJobsData()
       case apiJobStatusConstants.failure:
         return this.getFailureJobsListView()
-      case apiJobStatusConstants.loading:
+      case apiJobStatusConstants.inProgress:
         return this.getLoadingView()
       default:
         return null
@@ -190,7 +215,7 @@ class Jobs extends Component {
         return this.getProfileData()
       case apiStatusConstants.failure:
         return this.getFailureProfileView()
-      case apiStatusConstants.loading:
+      case apiStatusConstants.inProgress:
         return this.getLoadingView()
       default:
         return null
@@ -231,7 +256,22 @@ class Jobs extends Component {
     </ul>
   )
 
+  onChangeSearchInput = event => {
+    this.setState({searchInput: event.target.value})
+  }
+
+  onEnterValue = event => {
+    if (event.key === 'Enter') {
+      this.getJobs()
+    }
+  }
+
+  onSubmitEvent = () => {
+    this.getJobs()
+  }
+
   render() {
+    const {searchInput} = this.state
     return (
       <>
         <Header />
@@ -242,8 +282,16 @@ class Jobs extends Component {
                 type="search"
                 placeholder="Search"
                 className="search-bar"
+                value={searchInput}
+                onChange={this.onChangeSearchInput}
+                onKeyDown={this.onEnterValue}
               />
-              <button type="button" className="search-btn">
+              <button
+                type="button"
+                className="search-btn"
+                onClick={this.onSubmitEvent}
+                data-testid="searchButton"
+              >
                 <BsSearch className="search-icon" />
               </button>
             </div>
@@ -260,14 +308,22 @@ class Jobs extends Component {
             </div>
           </div>
 
-          <div>
+          <div className="wrap-jobs">
             <div className="search-container-large">
               <input
                 type="search"
                 placeholder="Search"
                 className="search-bar"
+                value={searchInput}
+                onChange={this.onChangeSearchInput}
+                onKeyDown={this.onEnterValue}
               />
-              <button type="button" className="search-btn">
+              <button
+                type="button"
+                className="search-btn"
+                onClick={this.onSubmitEvent}
+                data-testid="searchButton"
+              >
                 <BsSearch className="search-icon" />
               </button>
             </div>
