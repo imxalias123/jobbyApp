@@ -1,12 +1,19 @@
 .profile-container {
   background-image: url('https://assets.ccbp.in/frontend/react-js/profile-bg.png');
+  background-size: cover;
+  font-family: 'roboto';
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .jobs-container {
   background-color: black;
   background-size: cover;
   min-height: 100vh;
-
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,4 +22,77 @@
 .unordered-list {
   padding-left: 0px;
   margin-left: 0px;
+}
+.profile-img {
+  width: 32px;
+  margin-top: 10px;
+}
+.profile-heading {
+  font-size: 12px;
+  color: #6366f1;
+}
+.search-container {
+  display: flex;
+  align-items: center;
+}
+.search-bar {
+  background: transparent;
+  border: 2px solid #7e858e;
+  width: 100%;
+  border-right: none;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  padding-left: 20px;
+  height: 30px;
+}
+.search-btn {
+  background-color: #202020;
+  border: 2px solid #7e858e;
+  border-left: 0px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  width: 40px;
+}
+
+.search-icon {
+  color: white;
+  font-size: 18px;
+  margin-left: 5px;
+}
+.short-bio {
+  color: #64748b;
+  font-size: 10px;
+  margin-bottom: 10px;
+}
+.type-employment {
+  color: #f8fafc;
+  font-size: 12px;
+  font-family: 'roboto';
+  margin-top: 20px;
+}
+.checkbox-container {
+  padding-left: 0px;
+}
+.radio-container {
+  padding-left: 0px;
+  margin-left: 0px;
+}
+.label {
+  color: #f8fafc;
+  font-size: 10px;
+}
+.checkbox-li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.radio-li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
 }

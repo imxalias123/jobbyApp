@@ -2,6 +2,7 @@ import './index.css'
 
 import {Component} from 'react'
 import Cookies from 'js-cookie'
+import {BsSearch} from 'react-icons/bs'
 import Header from '../Header'
 import JobCard from '../JobCard'
 
@@ -81,13 +82,16 @@ class Jobs extends Component {
       },
     }
     const response = await fetch(url, options)
+
     if (response.ok === true) {
-      const fetchedData = await response.json()
-      const updatedData = fetchedData.profile_details.map(each => ({
-        name: each.name,
-        profileImageUrl: each.profile_image_url,
-        shortBio: each.short_bio,
+      const fetchedData = [await response.json()]
+
+      const updatedData = fetchedData.map(each => ({
+        name: each.profile_details.name,
+        profileImageUrl: each.profile_details.profile_image_url,
+        shortBio: each.profile_details.short_bio,
       }))
+      console.log(updatedData)
       this.setState({
         profileData: updatedData,
         responseStatus: true,
@@ -112,7 +116,7 @@ class Jobs extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok === true) {
       const fetchedData = await response.json()
-      console.log(fetchedData)
+
       const updatedData = fetchedData.jobs.map(each => ({
         companyLogoUrl: each.company_logo_url,
         employmentType: each.employment_type,
@@ -140,10 +144,10 @@ class Jobs extends Component {
     if (responseStatus) {
       const {name, profileImageUrl, shortBio} = profileData[0]
       return (
-        <div>
+        <div className="profile-container">
           <img src={profileImageUrl} alt="profile" className="profile-img" />
-          <h1>{name}</h1>
-          <p>{shortBio}</p>
+          <h1 className="profile-heading">{name}</h1>
+          <p className="short-bio">{shortBio}</p>
         </div>
       )
     }
@@ -193,26 +197,56 @@ class Jobs extends Component {
     }
   }
 
+  getCheckboxInput = () => (
+    <ul className="checkbox-container">
+      {employmentTypesList.map(eachItem => (
+        <li className="checkbox-li" key={eachItem.employmentTypeId}>
+          <input type="checkbox" id={eachItem.employmentTypeId} />
+          <label className="label" htmlFor={eachItem.employmentTypeId}>
+            {eachItem.label}
+          </label>
+        </li>
+      ))}
+    </ul>
+  )
+
+  getRadioInput = () => (
+    <ul className="radio-container">
+      {salaryRangesList.map(eachItem => (
+        <li className="radio-li" key={eachItem.salaryRangeId}>
+          <input type="radio" id={eachItem.salaryRangeId} />
+          <label className="label" htmlFor={eachItem.salaryRangeId}>
+            {eachItem.label}
+          </label>
+        </li>
+      ))}
+    </ul>
+  )
+
   render() {
     return (
       <>
         <Header />
         <div className="jobs-container">
+          <div className="search-container">
+            <input type="search" placeholder="Search" className="search-bar" />
+            <button type="button" className="search-btn">
+              <BsSearch className="search-icon" />
+            </button>
+          </div>
+
           <div>
             <div className="side-container">
               {this.renderProfileStatus()}
               <hr className="hr-line" />
-              <h1>Type of Employment</h1>
-              {this.renderCheckboxInput}
+              <h1 className="type-employment">Type of Employment</h1>
+              {this.getCheckboxInput()}
               <hr className="hr-line" />
-              <h1>Salary Range</h1>
-              {this.renderRadioInput}
+              <h1 className="type-employment">Salary Range</h1>
+              {this.getRadioInput()}
             </div>
           </div>
-          <div>
-            <input placeholder="Search" />
-            {this.renderJobStatus()}
-          </div>
+          <div>{this.renderJobStatus()}</div>
         </div>
       </>
     )
