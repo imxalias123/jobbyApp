@@ -201,7 +201,11 @@ class Jobs extends Component {
     <ul className="checkbox-container">
       {employmentTypesList.map(eachItem => (
         <li className="checkbox-li" key={eachItem.employmentTypeId}>
-          <input type="checkbox" id={eachItem.employmentTypeId} />
+          <input
+            type="checkbox"
+            id={eachItem.employmentTypeId}
+            className="checkbox"
+          />
           <label className="label" htmlFor={eachItem.employmentTypeId}>
             {eachItem.label}
           </label>
@@ -214,7 +218,11 @@ class Jobs extends Component {
     <ul className="radio-container">
       {salaryRangesList.map(eachItem => (
         <li className="radio-li" key={eachItem.salaryRangeId}>
-          <input type="radio" id={eachItem.salaryRangeId} />
+          <input
+            className="checkbox"
+            type="radio"
+            id={eachItem.salaryRangeId}
+          />
           <label className="label" htmlFor={eachItem.salaryRangeId}>
             {eachItem.label}
           </label>
@@ -228,25 +236,43 @@ class Jobs extends Component {
       <>
         <Header />
         <div className="jobs-container">
-          <div className="search-container">
-            <input type="search" placeholder="Search" className="search-bar" />
-            <button type="button" className="search-btn">
-              <BsSearch className="search-icon" />
-            </button>
+          <div className="large-side-container">
+            <div className="search-container">
+              <input
+                type="search"
+                placeholder="Search"
+                className="search-bar"
+              />
+              <button type="button" className="search-btn">
+                <BsSearch className="search-icon" />
+              </button>
+            </div>
+            <div>
+              <div className="side-container">
+                {this.renderProfileStatus()}
+                <hr className="hr-line" />
+                <h1 className="type-employment">Type of Employment</h1>
+                {this.getCheckboxInput()}
+                <hr className="hr-line" />
+                <h1 className="type-employment">Salary Range</h1>
+                {this.getRadioInput()}
+              </div>
+            </div>
           </div>
 
           <div>
-            <div className="side-container">
-              {this.renderProfileStatus()}
-              <hr className="hr-line" />
-              <h1 className="type-employment">Type of Employment</h1>
-              {this.getCheckboxInput()}
-              <hr className="hr-line" />
-              <h1 className="type-employment">Salary Range</h1>
-              {this.getRadioInput()}
+            <div className="search-container-large">
+              <input
+                type="search"
+                placeholder="Search"
+                className="search-bar"
+              />
+              <button type="button" className="search-btn">
+                <BsSearch className="search-icon" />
+              </button>
             </div>
+            {this.renderJobStatus()}
           </div>
-          <div>{this.renderJobStatus()}</div>
         </div>
       </>
     )

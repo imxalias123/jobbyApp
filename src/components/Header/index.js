@@ -21,8 +21,13 @@ const Header = props => {
         className="header-logo"
       />
       <div className="icons-container">
-        <AiFillHome className="home-icon" size={25} />
-        <BsBriefcase className="case-icon" size={25} />
+        <Link className="link" to="/">
+          <AiFillHome className="home-icon" size={25} />
+        </Link>
+
+        <Link className="link" to="/jobs">
+          <BsBriefcase className="case-icon" size={25} />
+        </Link>
 
         <FiLogOut onClick={onClickLogout} className="logout-icon" size={25} />
       </div>

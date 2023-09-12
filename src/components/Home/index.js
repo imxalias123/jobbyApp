@@ -1,6 +1,7 @@
 import './index.css'
+
 import Cookies from 'js-cookie'
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
 import Header from '../Header'
 
 const Home = () => {
@@ -19,9 +20,9 @@ const Home = () => {
             company reviews. Find the job that fits your abilities and
             potential.
           </p>
-          <button className="find-jobs" type="button">
+          <Link to="/jobs" className="find-jobs">
             Find Jobs
-          </button>
+          </Link>
         </div>
       </div>
     </div>

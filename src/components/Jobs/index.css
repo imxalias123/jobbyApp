@@ -35,6 +35,10 @@
   display: flex;
   align-items: center;
 }
+.search-container-large {
+  display: none;
+}
+
 .search-bar {
   background: transparent;
   border: 2px solid #7e858e;
@@ -83,7 +87,7 @@
   margin-left: 0px;
 }
 .label {
-  color: #f8fafc;
+  color: #cbd5e1;
   font-size: 10px;
 }
 .checkbox-li {
@@ -95,4 +99,56 @@
   display: flex;
   align-items: center;
   margin-bottom: 5px;
+}
+@media (min-width: 768px) {
+  .search-container {
+    display: none;
+  }
+  .search-bar {
+    height: 40px;
+    width: 40%;
+  }
+  .search-container-large {
+    display: flex;
+    align-items: center;
+  }
+  .search-btn {
+    height: 40px;
+  }
+  .jobs-container {
+    display: flex;
+    flex-direction: row;
+    padding: 40px;
+  }
+  .large-side-container {
+    width: 30%;
+    margin-right: 30px;
+  }
+  .profile-container {
+    width: 300px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+  }
+  .profile-img {
+    width: 48px;
+    margin-top: 15px;
+  }
+  .profile-heading {
+    font-size: 20px;
+  }
+  .short-bio {
+    font-size: 15px;
+    margin-bottom: 20px;
+  }
+  .type-employment {
+    font-size: 18px;
+    margin-top: 28px;
+    margin-bottom: 24px;
+  }
+  .label {
+    font-size: 18px;
+  }
+  .checkbox {
+    width: 28px;
+  }
 }
