@@ -3,7 +3,7 @@ import './index.css'
 import {Component} from 'react'
 import Cookies from 'js-cookie'
 import {BsSearch} from 'react-icons/bs'
-import {Loader} from 'react-loader-spinner'
+import Loader from 'react-loader-spinner'
 import Header from '../Header'
 import JobCard from '../JobCard'
 
@@ -67,6 +67,8 @@ class Jobs extends Component {
     apiStatus: apiStatusConstants.initial,
     apiJobStatus: apiJobStatusConstants.initial,
     searchInput: '',
+    checkboxInputs: [],
+    radioInput: '',
   }
 
   componentDidMount() {
@@ -75,6 +77,7 @@ class Jobs extends Component {
   }
 
   getProfile = async () => {
+    this.setState({apiStatus: apiStatusConstants.inProgress})
     const url = 'https://apis.ccbp.in/profile'
     const jwtToken = Cookies.get('jwt_token')
     const options = {
@@ -108,10 +111,10 @@ class Jobs extends Component {
 
   getJobs = async () => {
     this.setState({apiJobStatus: apiJobStatusConstants.inProgress})
-    const {searchInput} = this.state
+    const {searchInput, radioInput, checkboxInputs} = this.state
 
     const jwtToken = Cookies.get('jwt_token')
-    const apiUrl = `https://apis.ccbp.in/jobs?search=${searchInput}`
+    const apiUrl = `https://apis.ccbp.in/jobs?employment_type=${checkboxInputs}&minimum_package=${radioInput}&search=${searchInput}`
     const options = {
       method: 'GET',
       headers: {
@@ -132,6 +135,7 @@ class Jobs extends Component {
         rating: each.rating,
         title: each.title,
       }))
+      console.log(updatedData)
       this.setState({
         jobsList: updatedData,
         apiJobStatus: apiJobStatusConstants.success,
@@ -140,6 +144,31 @@ class Jobs extends Component {
       this.setState({
         apiJobStatus: apiJobStatusConstants.failure,
       })
+    }
+  }
+
+  onGetRadioOption = event => {
+    this.setState({radioInput: event.target.id}, this.getJobs)
+  }
+
+  onGetCheckboxInputs = event => {
+    const {checkboxInputs} = this.state
+    const Inputs = checkboxInputs.filter(
+      eachItem => eachItem === event.target.id,
+    )
+    console.log(Inputs)
+    if (Inputs.length === 0) {
+      this.setState(
+        prevState => ({
+          checkboxInputs: [...prevState.checkboxInputs, event.target.id],
+        }),
+        this.getJobs,
+      )
+    } else {
+      const filterData = checkboxInputs.filter(
+        eachItem => eachItem !== event.target.id,
+      )
+      this.setState({checkboxInputs: filterData}, this.getJobs)
     }
   }
 
@@ -192,6 +221,48 @@ class Jobs extends Component {
     </div>
   )
 
+  onClickProfileRetry = () => {
+    this.getProfileData()
+  }
+
+  onClickJobRetry = () => {
+    this.getJobsData()
+  }
+
+  getFailureJobsListView = () => (
+    <div className="failure-container">
+      <img
+        src="https://assets.ccbp.in/frontend/react-js/failure-img.png"
+        alt="failure view"
+        className="failure-view"
+      />
+
+      <h1 className="failure-view-h1">Oops! Something Went Wrong</h1>
+      <p className="failure-view-p">
+        We cannot seem to find the page you are looking for.
+      </p>
+      <button
+        type="button"
+        onClick={this.onClickJobRetry}
+        className="retry-btn"
+      >
+        Retry
+      </button>
+    </div>
+  )
+
+  getFailureProfileView = () => (
+    <div className="failure-profile-view">
+      <button
+        type="button"
+        onClick={this.onClickProfileRetry}
+        className="retry-btn"
+      >
+        Retry
+      </button>
+    </div>
+  )
+
   renderJobStatus = () => {
     const {apiJobStatus} = this.state
 
@@ -230,6 +301,7 @@ class Jobs extends Component {
             type="checkbox"
             id={eachItem.employmentTypeId}
             className="checkbox"
+            onChange={this.onGetCheckboxInputs}
           />
           <label className="label" htmlFor={eachItem.employmentTypeId}>
             {eachItem.label}
@@ -247,6 +319,8 @@ class Jobs extends Component {
             className="checkbox"
             type="radio"
             id={eachItem.salaryRangeId}
+            name="option"
+            onChange={this.onGetRadioOption}
           />
           <label className="label" htmlFor={eachItem.salaryRangeId}>
             {eachItem.label}

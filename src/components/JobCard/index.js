@@ -1,4 +1,5 @@
 import './index.css'
+import {Link} from 'react-router-dom'
 import {AiFillStar} from 'react-icons/ai'
 import {MdLocationOn} from 'react-icons/md'
 import {BsFillBriefcaseFill} from 'react-icons/bs'
@@ -17,38 +18,40 @@ const jobCard = props => {
   } = jobsData
   return (
     <>
-      <li className="card-container">
-        <div>
-          <div className="employment-details">
-            <img src={companyLogoUrl} alt="logo" className="company-logo" />
-            <div className="rating-container">
-              <h1 className="employment-title">{title}</h1>
-              <div className="rating">
-                <AiFillStar className="star" />
-                <p className="rating-text">{rating}</p>
+      <Link to={`/jobs/${id}`} className="link">
+        <li className="card-container">
+          <div>
+            <div className="employment-details">
+              <img src={companyLogoUrl} alt="logo" className="company-logo" />
+              <div className="rating-container">
+                <h1 className="employment-title">{title}</h1>
+                <div className="rating">
+                  <AiFillStar className="star" />
+                  <p className="rating-text">{rating}</p>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="wrap">
-            <div className="wrap-location-employment">
-              <div className="location-container">
-                <MdLocationOn className="location-icon" />
-                <p className="location-text">{location}</p>
+            <div className="wrap">
+              <div className="wrap-location-employment">
+                <div className="location-container">
+                  <MdLocationOn className="location-icon" />
+                  <p className="location-text">{location}</p>
+                </div>
+                <div className="location-container">
+                  <BsFillBriefcaseFill className="location-icon" />
+                  <p className="location-text">{employmentType}</p>
+                </div>
               </div>
-              <div className="location-container">
-                <BsFillBriefcaseFill className="location-icon" />
-                <p className="location-text">{employmentType}</p>
-              </div>
+              <p className="package">{packagePerAnnum}</p>
             </div>
-            <p className="package">{packagePerAnnum}</p>
+            <hr className="hr-line" />
           </div>
-          <hr className="hr-line" />
-        </div>
-        <div>
-          <h1 className="description-heading">Description</h1>
-          <p className="job-description">{jobDescription}</p>
-        </div>
-      </li>
+          <div>
+            <h1 className="description-heading">Description</h1>
+            <p className="job-description">{jobDescription}</p>
+          </div>
+        </li>
+      </Link>
     </>
   )
 }
