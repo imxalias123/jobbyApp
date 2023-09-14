@@ -85,6 +85,7 @@ class LoginForm extends Component {
               className="input"
               placeholder="Password"
               value={password}
+              type="password"
               id="password"
               onChange={this.onChangePassword}
             />

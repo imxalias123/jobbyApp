@@ -15,24 +15,37 @@
   width: 80px;
   height: 20px;
   padding-left: 20px;
+  margin-top: 0px;
+  margin-bottom: 20px;
+  margin-right: 130px;
 }
 .home-icon {
   color: white;
   margin-right: 18px;
+  margin-bottom: 20px;
 }
 .case-icon {
   color: white;
   margin-right: 18px;
+  margin-bottom: 20px;
 }
 .logout-icon {
   color: white;
   margin-right: 15px;
 }
-.link-container {
+.large {
   display: none;
+  margin-bottom: 20px;
 }
 .logout-btn {
   display: none;
+}
+.ul-header {
+  display: flex;
+  align-items: center;
+  padding-left: 0px;
+  padding-top: 30px;
+  list-style-type: none;
 }
 @media (min-width: 768px) {
   .logout-icon {
@@ -43,6 +56,7 @@
     height: 45px;
     margin-left: 30px;
     padding-left: 10px;
+    margin-right: 500px;
   }
   .case-icon {
     display: none;
@@ -55,10 +69,11 @@
     margin-left: 10px;
     color: #fff;
   }
-  .link-container {
+  .large {
     display: flex;
-    margin-right: 150px;
-    list-style-type: none;
+    font-size: 20px;
+    margin-bottom: 50px;
+    margin-left: 10px;
   }
   .logout-btn {
     display: flex;
@@ -82,6 +97,8 @@
 
   .header-container {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 }

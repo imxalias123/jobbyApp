@@ -2,7 +2,7 @@
   background-color: #000000;
   padding-left: 20px;
   padding-top: 20px;
-  padding-right: 10px;
+  padding-right: 20px;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,6 +13,10 @@
   background-color: #202020;
   border-radius: 10px;
   padding: 10px;
+  padding-top: 40px;
+}
+.similar-jobs-ul {
+  padding: 0px;
 }
 
 .location-icon-d {
@@ -102,7 +106,7 @@
   font-weight: 500;
 }
 .job-description-d {
-  color: #fff;
+  color: #cbd5e1;
   font-family: 'roboto';
   font-size: 13px;
   margin-top: 35px;
@@ -130,8 +134,8 @@
 }
 .skill-h1 {
   color: #fff;
-  font-size: 15px;
-  margin-top: 10px;
+  font-size: 18px;
+  margin-top: 20px;
   margin-bottom: 15px;
 }
 .logos-container {
@@ -139,6 +143,7 @@
   display: flex;
   flex-wrap: wrap;
   padding: 0px;
+  margin-left: 0px;
 }
 .li-logo {
   display: flex;
@@ -154,16 +159,60 @@
   width: 26px;
   height: 22px;
   margin-right: 10px;
+  margin-bottom: 10px;
+}
+.life-at-company {
+  display: flex;
+  flex-direction: column;
+}
+.lifeAtCompany-img {
+  height: 200px;
+
+  margin-bottom: 20px;
+}
+.life-h1 {
+  color: #fff;
+  font-size: 20px;
+}
+.life-p {
+  color: #cbd5e1;
+  font-size: 18px;
+}
+.Similar-jobs-h1 {
+  color: #fff;
+  font-size: 25px;
+  margin-top: 30px;
 }
 
 @media (min-width: 768px) {
+  .life-at-company {
+    display: flex;
+    flex-direction: row;
+  }
+  .li-logo {
+    width: 200px;
+  }
   .company-logo-d {
     width: 80px;
     height: 80px;
     margin-top: 8px;
   }
+  .skill-h1 {
+    font-size: 30px;
+  }
+  .similar-jobs-ul {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
   .large-side-container-d {
     margin-right: 40px;
+  }
+  .card-detail-container {
+    background-color: #202020;
+    border-radius: 20px;
+    padding: 40px;
   }
   .card-container-d {
     padding-left: 25px;
@@ -193,6 +242,13 @@
     font-size: 25px;
     margin-right: 10px;
   }
+  .logo-text {
+    font-size: 20px;
+  }
+  .logos {
+    width: 60px;
+    height: 40px;
+  }
   .wrap-location-employment-d {
     margin-top: 20px;
   }
@@ -201,11 +257,10 @@
     color: #cbd5e1;
   }
   .description-heading-d {
-    font-size: 20px;
+    font-size: 30px;
   }
   .job-description-d {
-    font-size: 18px;
-    color: #cbd5e1;
+    font-size: 25px;
   }
   .package-d {
     font-size: 20px;
@@ -213,5 +268,25 @@
   }
   .search-container-large-d {
     margin-bottom: 40px;
+  }
+  .bg-container {
+    background-color: #000000;
+    padding-left: 60px;
+    padding-top: 60px;
+    padding-right: 60px;
+  }
+  .life-p {
+    font-size: 25px;
+  }
+  .life-h1 {
+    font-size: 30px;
+  }
+  .width {
+    width: 70%;
+  }
+  .lifeAtCompany-img {
+    width: 25%;
+
+    margin-top: 20px;
   }
 }

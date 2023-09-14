@@ -222,11 +222,11 @@ class Jobs extends Component {
   )
 
   onClickProfileRetry = () => {
-    this.getProfileData()
+    this.getProfile()
   }
 
   onClickJobRetry = () => {
-    this.getJobsData()
+    this.getJobs()
   }
 
   getFailureJobsListView = () => (

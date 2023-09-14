@@ -15,30 +15,31 @@ const Header = props => {
 
   return (
     <div className="header-container">
-      <img
-        src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
-        alt="website logo"
-        className="header-logo"
-      />
-      <div className="icons-container">
-        <Link className="link" to="/">
-          <AiFillHome className="home-icon" size={25} />
-        </Link>
-
-        <Link className="link" to="/jobs">
-          <BsBriefcase className="case-icon" size={25} />
-        </Link>
-
-        <FiLogOut onClick={onClickLogout} className="logout-icon" size={25} />
-      </div>
-      <ul className="link-container">
-        <Link className="link" to="/">
-          <li>Home</li>
-        </Link>
-        <Link className="link" to="/jobs">
-          <li>Jobs</li>
-        </Link>
+      <ul className="ul-header">
+        <li>
+          <Link className="link" to="/">
+            <img
+              src="https://assets.ccbp.in/frontend/react-js/logo-img.png"
+              alt="website logo"
+              className="header-logo"
+            />
+          </Link>
+        </li>
+        <li>
+          <Link className="link" to="/">
+            <AiFillHome className="home-icon" size={25} />
+            <h1 className="large">Home</h1>
+          </Link>
+        </li>
+        <li>
+          <Link className="link" to="/jobs">
+            <BsBriefcase className="case-icon" size={25} />
+            <h1 className="large">Jobs</h1>
+          </Link>
+        </li>
       </ul>
+      <FiLogOut onClick={onClickLogout} className="logout-icon" size={25} />
+
       <button type="button" onClick={onClickLogout} className="logout-btn">
         Logout
       </button>

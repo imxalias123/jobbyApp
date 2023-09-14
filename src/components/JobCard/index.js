@@ -22,7 +22,11 @@ const jobCard = props => {
         <li className="card-container">
           <div>
             <div className="employment-details">
-              <img src={companyLogoUrl} alt="logo" className="company-logo" />
+              <img
+                src={companyLogoUrl}
+                alt="company logo"
+                className="company-logo"
+              />
               <div className="rating-container">
                 <h1 className="employment-title">{title}</h1>
                 <div className="rating">
