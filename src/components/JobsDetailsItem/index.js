@@ -4,6 +4,7 @@ import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {AiFillStar} from 'react-icons/ai'
 import {MdLocationOn} from 'react-icons/md'
+import {BiLinkExternal} from 'react-icons/bi'
 import {BsFillBriefcaseFill} from 'react-icons/bs'
 import Header from '../Header'
 
@@ -108,36 +109,51 @@ class JobsDetailsItem extends Component {
     } = jobDetailsData[0]
 
     return (
-      <div>
+      <div className="card-detail-container">
         <div>
-          <div className="employment-details">
-            <img src={companyLogoUrl} alt="logo" className="company-logo" />
-            <div className="rating-container">
-              <h1 className="employment-title">{title}</h1>
-              <div className="rating">
-                <AiFillStar className="star" />
-                <p className="rating-text">{rating}</p>
+          <div className="employment-details-d">
+            <img src={companyLogoUrl} alt="logo" className="company-logo-d" />
+            <div className="rating-container-d">
+              <h1 className="employment-title-d">{title}</h1>
+              <div className="rating-d">
+                <AiFillStar className="star-d" />
+                <p className="rating-text-d">{rating}</p>
               </div>
             </div>
           </div>
-          <div className="wrap">
-            <div className="wrap-location-employment">
-              <div className="location-container">
-                <MdLocationOn className="location-icon" />
-                <p className="location-text">{location}</p>
+          <div className="wrap-d">
+            <div className="wrap-location-employment-d">
+              <div className="location-container-d">
+                <MdLocationOn className="location-icon-d" />
+                <p className="location-text-d">{location}</p>
               </div>
-              <div className="location-container">
-                <BsFillBriefcaseFill className="location-icon" />
-                <p className="location-text">{employmentType}</p>
+              <div className="location-container-d">
+                <BsFillBriefcaseFill className="location-icon-d" />
+                <p className="location-text-d">{employmentType}</p>
               </div>
             </div>
-            <p className="package">{packagePerAnnum}</p>
+            <p className="package-d">{packagePerAnnum}</p>
           </div>
-          <hr className="hr-line" />
+          <hr className="hr-line-dd" />
         </div>
         <div>
-          <h1 className="description-heading">Description</h1>
-          <p className="job-description">{jobDescription}</p>
+          <div className="link-d">
+            <h1 className="description-heading-d">Description</h1>
+            <a className="anchor" href={companyWebsiteUrl}>
+              Visit <BiLinkExternal className="icon-link" />
+            </a>
+          </div>
+
+          <p className="job-description-d">{jobDescription}</p>
+          <h1 className="skill-h1">Skills</h1>
+          <ul className="logos-container">
+            {skills.map(each => (
+              <li className="li-logo" key={each.name}>
+                <img src={each.imageUrl} alt={each.name} className="logos" />
+                <p className="logo-text">{each.name}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     )
@@ -168,7 +184,7 @@ class JobsDetailsItem extends Component {
     return (
       <>
         <Header />
-        <div>{this.renderJobDetails()}</div>
+        <div className="bg-container">{this.renderJobDetails()}</div>
       </>
     )
   }
